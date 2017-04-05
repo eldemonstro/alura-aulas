@@ -1,0 +1,21 @@
+{
+  "name": "casadocodigo",
+  "version": "1.0.0",
+  "description": "site da casa do codigo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "casa",
+    "do",
+    "codigo",
+    "nodejs",
+    "alura"
+  ],
+  "author": "Fabricio Bezerra",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
