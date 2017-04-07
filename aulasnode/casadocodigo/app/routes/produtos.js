@@ -5,15 +5,14 @@ module.exports = function (app) {
         var connection = mysql.createConnection({
             host : 'localhost',
             user : 'root',
-            password : '',
+            password : 'admin',
             database : 'casadocodigo_nodejs'
         });
 
         connection.query('select * from livros', function(err, result){
-            res.send(results);
+            console.log(result[0].id);
+            res.render('produtos/lista', {lista:result});
         });
-
-
         connection.end();
     });
 }
