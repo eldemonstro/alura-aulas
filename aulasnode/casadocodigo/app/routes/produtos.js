@@ -1,11 +1,10 @@
-var connectionFactory = require('../infra/connectionFactory');
 module.exports = function (app) {
     app.get('/produtos', function (req, res) {
-        //conectando no mysql
-        var connection = connectionFactory();
+        var connection = app.infra.connectionFactory();
+        var produtosBanco = new app.infra.ProdutosDAO(connection);
 
-        connection.query('select * from livros', function(err, result){
-            res.render('produtos/lista', {lista:result});
+        produtosBanco.lista(function (erros, resultados) {
+            res.render('produtos/lista', { lista: resultados });
         });
         connection.end();
     });
