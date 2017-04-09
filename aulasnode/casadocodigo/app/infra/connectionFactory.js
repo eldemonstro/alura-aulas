@@ -1,14 +1,25 @@
-var mysql = require('mysql');
+var mysql  = require('mysql');
 
-var createDBConnection = function () {
-    return mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'admin',
-        database: 'casadocodigo_nodejs'
-    });
+function createDBConnection() {
+    if(!process.env.NODE_ENV) {
+        return mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: 'admin',
+            database: 'casadocodigo_nodejs'
+        });
+    }
+
+    else if(process.env.NODE_ENV == 'development') {
+        return mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: 'admin',
+            database: 'casadocodigo_nodejs_test'
+        });
+    }
 }
 
-module.exports = function(){
+module.exports = function() {
     return createDBConnection;
 }

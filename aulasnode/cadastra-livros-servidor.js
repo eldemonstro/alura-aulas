@@ -19,7 +19,7 @@ var client = http.request(configuracoes, function(res){
 });
 
 var produto = {
-    titulo: '',
+    titulo: 'GYA GYA GYA',
     descricao: 'WEULP',
     preco: 90000
 };
