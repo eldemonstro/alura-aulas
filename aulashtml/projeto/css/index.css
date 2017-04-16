@@ -1,33 +1,7 @@
 .foto-home {
     height: 200px;
-    -webkit-border-radius: 10% 50% / 50% 10%;
-    -moz-border-radius: 10% 50% / 50% 10%;
-    border-radius: 10% 50% / 50% 10%;
-    box-shadow: 0 0 3em #000;
+    border-radius: 50%;
 }
-
-.banner-twitter {
-    width: 14em;
-    line-height: 1;
-    padding: 1em 0;
-    box-sizing: border-box;
-
-    text-align: center;
-    text-decoration: none;
-    background-color: #3C1D3D;
-    color: white;
-    border: .25em solid black;
-
-    font-size: 1.2em;
-    font-family: "Open Sans Condesed", sans-serif;
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform-origin: 0 0;
-    transform: translate(6.5754em, -2.4749em) rotate(45deg);
-}
-
 .saudacao p {
     font-size: 1.5em;
     color: #99A;
@@ -38,24 +12,21 @@
     font-size: 3em;
     color: #889;
 }
-
 .saudacao-ultima-linha {
     text-align: right;
     display: block;
 }
-
 .saudacao strong {
     font-size: 2em;
     color: #000;
 }
-
 .saudacao em {
     color: #851944;
     font-size: 4em;
-    transform: rotate(-5deg) skew(-10deg);
+    -webkit-transform: rotate(-5deg) skew(-10deg);
+            transform: rotate(-5deg) skew(-10deg);
     display: inline-block;
 }
-
 .botao-index {
     font-size: 1.25em;
     background-color: #851944;
@@ -66,86 +37,86 @@
     margin: 2em auto;
     display: block;
     text-align: center;
-    box-shadow: 0 0 1em #000, inset 0 0 .5em #FFF;
 }
-
 .secao-inicio {
     padding: 2em;
 }
-
 .secao-inicio h2 {
     font-size: 3em;
-    text-shadow: 5px 5px #000;
     text-transform: uppercase;
     margin-bottom: .5em;
+    text-shadow: 2px 2px #000;
 }
-
 .trabalhos {
     background-color: #3C1D3D;
     border-top: .5em solid #000;
     border-bottom: .5em solid #000;
+    background-image: linear-gradient(135deg, transparent, transparent 14px, rgba(0,0,0,.1) 14px, rgba(0,0,0,.1) 15px, transparent 15px, transparent);
+    background-size: 20px 20px;
+    background-attachment: fixed;
 }
-
 .trabalhos h2 {
     color: #FFF;
 }
-
 .trabalhos ul {
     overflow: hidden;
     border: .5em solid black;
 }
-
 .trabalhos li {
     float: left;
     width: 33.333%;
 }
-
 .trabalhos img {
     width: 100%;
     display: block;
 }
-
 .blog {
     background-color: #999;
+    position: relative;
+    background-image: linear-gradient(45deg, transparent, transparent 14px, rgba(255,255,255,.1) 14px, rgba(255,255,255,.1) 15px, transparent 15px, transparent);
+    background-size: 20px 20px;
+    background-attachment: fixed;
     color: #FFF;
     border-bottom: .5em solid #851944;
-    position: relative;
 }
-
 .blog small {
     position: relative;
     top: -2em;
 }
-
+.blog li {
+    width: 30%;
+}
 .blog li a {
     color: #FCF;
     padding: .5em;
     display: block;
 }
-
-.inicio-post {
-    background-color: #FFF;
-    color: #000;
-    position: absolute;
-    top: 3em;
-    left: 16em;
-    height: 6em;
-    padding: 1em;
-    margin: 1em;
+footer {
+    background-color: #000;
+    color: #FFF;
+    padding: 2em;
 }
-
-.inicio-post-selecionado a {
-    background-color: #fff;
-    color: #000;
+footer h2 {
+    font-size: 3em;
 }
-
-
-.titulo-principal {
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-    position: relative;
+footer a {
+    color: #F99;
 }
-
+main {
+    width: 100%;
+    padding-bottom: 0;
+    float: none;
+}
+html,body {
+    overflow-x: hidden;
+    height: 100%;
+}
+body {
+    -webkit-perspective: 6px;
+            perspective: 6px;
+    -webkit-perspective-origin: 50% 160px;
+            perspective-origin: 50% 160px;
+}
 .palavras-home {
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
@@ -159,7 +130,7 @@
     font-family: "Shadows Into Light", cursive;
     font-weight: bold;
     font-size: 400%;
-    color: #D5447E;
+    color: rgba(255, 127, 127, .5);
     position: absolute;
 }
 .eficiencia {
@@ -173,24 +144,28 @@
     left: 20%;
     -webkit-transform: translate(-50%, -50%) translateZ(1px) rotate(10deg) scale(.25);
             transform: translate(-50%, -50%) translateZ(1px) rotate(10deg) scale(.25);
+    opacity: .3;
 }
 .codigo-limpo {
     top: 45%;
     left: 25%;
     -webkit-transform: translate(-50%, -50%) translateZ(2px) rotate(-10deg) scale(.25);
             transform: translate(-50%, -50%) translateZ(2px) rotate(-10deg) scale(.25);
+    opacity: .6;
 }
 .css3 {
     top: 55%;
     left: 35%;
     -webkit-transform: translate(-50%, -50%) translateZ(2px) rotate(5deg) scale(.25);
             transform: translate(-50%, -50%) translateZ(2px) rotate(5deg) scale(.25);
+    opacity: .6;
 }
 .html5 {
     top: 30%;
     left: 65%;
     -webkit-transform: translate(-50%, -50%) translateZ(2px) rotate(10deg) scale(.25);
             transform: translate(-50%, -50%) translateZ(2px) rotate(10deg) scale(.25);
+    opacity: .6;
 }
 .javascript {
     top: 15%;
@@ -203,57 +178,87 @@
     left: 35%;
     -webkit-transform: translate(-50%, -50%) translateZ(3px) rotate(-5deg) scale(.25);
             transform: translate(-50%, -50%) translateZ(3px) rotate(-5deg) scale(.25);
+    opacity: .8;
 }
 .responsivo {
     top: 40%;
     left: 40%;
     -webkit-transform: translate(-50%, -50%) translateZ(3px) rotate(10deg) scale(.25);
             transform: translate(-50%, -50%) translateZ(3px) rotate(10deg) scale(.25);
+    opacity: .8;
 }
 .otimizacoes {
     top: 70%;
     left: 65%;
     -webkit-transform: translate(-50%, -50%) translateZ(2px) rotate(-5deg) scale(.25);
             transform: translate(-50%, -50%) translateZ(2px) rotate(-5deg) scale(.25);
+    opacity: .6;
 }
 .agilidade {
     top: 75%;
     left: 35%;
     -webkit-transform: translate(-50%, -50%) translateZ(1px) rotate(5deg) scale(.25);
             transform: translate(-50%, -50%) translateZ(1px) rotate(5deg) scale(.25);
+    opacity: .3;
 }
 .design {
     top: 40%;
     left: 60%;
     -webkit-transform: translate(-50%, -50%) translateZ(2px) rotate(10deg) scale(.25);
             transform: translate(-50%, -50%) translateZ(2px) rotate(10deg) scale(.25);
+    opacity: .6;
 }
-footer {
-    background-color: #000;
-    color: #FFF;
-    padding: 2em;
+.titulo-principal {
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    position: relative;
 }
+.banner-twitter {
+    position: absolute;
+    top: 0;
+    right: 0;
 
-footer h2 {
-    font-size: 3em;
-}
+    line-height: 1;
 
-footer a {
-    color: #F99;
-}
+    /* largura = 14em */
+    /* altura = 3.5em */
+    /* tx = .707 * h - .707 * w + w */
+    /* ty = -.707 * h */
+    -webkit-transform: translate(calc(0.707 * (3.5em - 100%) + 100%), calc(-.707 * 3.5em)) rotate(45deg);
+            transform: translate(calc(0.707 * (3.5em - 100%) + 100%), calc(-.707 * 3.5em)) rotate(45deg);
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
 
-main {
-    width: 100%;
-    padding-bottom: 0;
-    float: none;
-}
+    width: 14em;
+    padding: 1em 0;
+    box-sizing: border-box;
 
-html, body {
-    height: 100%;
-    overflow-x: hidden;
-}
+    text-align: center;
+    text-decoration: none;
+    background-color: #3C1D3D;
+    color: white;
+    border: .25em solid black;
 
-body {
-    perspective: 6px;
-    perspective-origin: 50% 160px;
+    font-size: 1.2em;
+    font-family: "Open Sans Condensed", sans-serif;
+}
+.blog .inicio-post {
+    position: absolute;
+    top: 4em;
+    height: 8em;
+    left: 30%;
+    right: 4em;
+    background-color: #F2FFFC;
+    color: #000;
+    padding: 1.5em;
+    display: none;
+}
+.blog a:hover + .inicio-post,
+.blog a:focus + .inicio-post {
+    display: block;
+}
+.blog a:hover,
+.blog a:focus {
+    background-color: #F2FFFC;
+    color: #F26;
 }
