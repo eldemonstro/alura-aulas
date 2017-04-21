@@ -8,20 +8,20 @@
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 
-	<script>
-		console.log("Olá mundo");
-	</script>
 </head>
 
 <body>
+
 	<header>
 		<div class="container">
-			<h1 class="titulo">Aparecida Nutrição</h1>
+			<h2 class="titulo">Aparecida Nutrição</h2>
 		</div>
 	</header>
 	<main>
 		<section class="container">
 			<h2>Meus pacientes</h2>
+			<label for="filtrar-tabela">Filtre</label>
+			<input type="text" name="filtro" id="filtrar-tabela" placeholder="digite o nome do pacietne"> 
 			<table>
 				<thead>
 					<tr>
@@ -33,7 +33,7 @@
 					</tr>
 				</thead>
 				<tbody id="tabela-pacientes">
-					<tr class="paciente">
+					<tr class="paciente" id="primeiro-paciente">
 						<td class="info-nome">Paulo</td>
 						<td class="info-peso">100</td>
 						<td class="info-altura">2.00</td>
@@ -73,12 +73,14 @@
 					</tr>
 				</tbody>
 			</table>
-
+			<span id='erro-ajax' class='invisivel'>Erro no bagulho</span>
+			<button id="buscar-pacientes" class="botao bto-principal">Adicionar</button>
 		</section>
 	</main>
 
 	<section class="container">
 		<h2 id="titulo-form">Adicionar novo paciente</h2>
+		<ul id="mensagens-erro"></ul>
 		<form id="form-adiciona">
 			<div class="">
 				<label for="nome">Nome:</label>
@@ -100,9 +102,12 @@
 			<button id="adicionar-paciente" class="botao bto-principal">Adicionar</button>
 		</form>
 	</section>
-	
+
 	<script src="js/calcula-imc.js"></script>
 	<script src="js/form.js"></script>
+	<script src="js/remover-paciente.js"></script>
+	<script src="js/filtra.js"></script>
+	<script src="js/buscar.js"></script>
 </body>
 
 </html>
