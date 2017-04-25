@@ -1,4 +1,4 @@
-angular.module('alurapic').controller('FotoController', function ($scope, recursoFoto, $routeParams) {
+angular.module('alurapic').controller('FotoController', function ($scope, cadastroDeFotos, recursoFoto, $routeParams) {
     $scope.foto = {};
     $scope.mensagem = '';
 
@@ -27,7 +27,18 @@ angular.module('alurapic').controller('FotoController', function ($scope, recurs
 
     $scope.submeter = function () {
         if ($scope.formulario.$valid) {
-            if ($scope.foto._id) {
+            cadastroDeFotos.cadastrar($scope.foto)
+                .then(function (dados) {
+                    $scope.mensagem = dados.mensagem;
+                    if (dados.inclusao) {
+                        $scope.foto = {};
+                    }
+                })
+                .catch(function (dados) {
+                    $scope.mensagem = dados.mensagem;
+                });
+
+            /*if ($scope.foto._id) {
 
                 recursoFoto.update({ fotoId: $scope.foto._id }, $scope.foto, function () {
                     $scope.mensagem = 'Foi possivel editar';
@@ -36,7 +47,7 @@ angular.module('alurapic').controller('FotoController', function ($scope, recurs
                     $scope.mensagem = 'Não foi possivel editar';
                 });
 
-                /*
+                
                 $http.put('v1/fotos/' + $scope.foto._id, $scope.foto)
                     .success(function () {
                         $scope.mensagem = 'Foi possivel editar';
@@ -45,7 +56,6 @@ angular.module('alurapic').controller('FotoController', function ($scope, recurs
                         console.log(err);
                         $scope.mensagem = 'Não foi possivel editar';
                     });
-                    */
             } else {
                 console.log($scope.foto);
                 recursoFoto.save($scope.foto, function () {
@@ -57,7 +67,7 @@ angular.module('alurapic').controller('FotoController', function ($scope, recurs
                 });
 
 
-                /*$http.post('v1/fotos', $scope.foto)
+                $http.post('v1/fotos', $scope.foto)
                     .success(function () {
                         $scope.foto = {};
                         $scope.mensagem = 'Foto cadastrada com sucesso';
@@ -65,8 +75,8 @@ angular.module('alurapic').controller('FotoController', function ($scope, recurs
                     .error(function (erro) {
                         console.log(erro);
                         $scope.mensagem = 'Deu errado';
-                    });*/
-            }
+                    });
+            }*/
         }
     };
 });
