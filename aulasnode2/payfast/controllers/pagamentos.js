@@ -48,12 +48,12 @@ module.exports = function (app) {
     app.post('/pagamentos/pagamento', function (req, res) {
         console.log('Recebida requisição POST em /pagamentos/pagamento');
 
-        req.assert('forma_de_pagamento',
-            "Forma de pagamento eh obrigatoria")
+        req.assert('pagamento.forma_de_pagamento',
+                "Forma de pagamento eh obrigatoria")
             .notEmpty();
 
-        req.assert('valor',
-            'O valor eh obrigatorio e deve ser um decimal')
+        req.assert('pagamento.valor',
+                'O valor eh obrigatorio e deve ser um decimal')
             .notEmpty()
             .isFloat();
 
@@ -65,7 +65,7 @@ module.exports = function (app) {
             return;
         }
 
-        var pagamento = req.body;
+        var pagamento = req.body['pagamento'];
         pagamento.status = 'CRIADO';
         pagamento.data = new Date;
 
@@ -78,26 +78,62 @@ module.exports = function (app) {
                 res.status(500).send(err);
             } else {
                 pagamento.id = result.insertId;
-                res.location('/pagamentos/pagamento/' + pagamento.id);
 
-                var response = {
-                    dados_do_pagamento: pagamento,
-                    links: [
-                        {
-                            href: "http://localhost:3000/pagamentos/pagamento/" + pagamento.id,
-                            rel: "confirmar",
-                            method: "PUT"
-                        },
-                        {
-                            href: "http://localhost:3000/pagamentos/pagamento/" + pagamento.id,
-                            rel: "cancelar",
-                            method: "DELETE"
+                if (pagamento.forma_de_pagamento == 'cartao') {
+                    var cartao = req.body["cartao"];
+                    var clienteCartoes = new app.servicos.clienteCartoes();
+                    clienteCartoes.autoriza(cartao, function (exception, request, response, retorno) {
+                        if (exception) {
+                            console.log(exception);
+                            res.status(400).send(exception);
+                        } else {
+
+                            res.location('/pagamentos/pagamento/' + pagamento.id);
+
+                            var resp = {
+                                dados_do_pagamento: pagamento,
+                                cartao: retorno,
+                                links: [{
+                                        href: "http://localhost:3000/pagamentos/pagamento/" + pagamento.id,
+                                        rel: "confirmar",
+                                        method: "PUT"
+                                    },
+                                    {
+                                        href: "http://localhost:3000/pagamentos/pagamento/" + pagamento.id,
+                                        rel: "cancelar",
+                                        method: "DELETE"
+                                    }
+                                ]
+                            }
+
+                            console.log(retorno);
+                            res.status(201).json(resp);
+
                         }
-                    ]
-                }
+                        return;
+                    });
 
-                console.log('pagamento criado');
-                res.status(201).json(response);
+                } else {
+                    res.location('/pagamentos/pagamento/' + pagamento.id);
+
+                    var response = {
+                        dados_do_pagamento: pagamento,
+                        links: [{
+                                href: "http://localhost:3000/pagamentos/pagamento/" + pagamento.id,
+                                rel: "confirmar",
+                                method: "PUT"
+                            },
+                            {
+                                href: "http://localhost:3000/pagamentos/pagamento/" + pagamento.id,
+                                rel: "cancelar",
+                                method: "DELETE"
+                            }
+                        ]
+                    }
+
+                    console.log('pagamento criado');
+                    res.status(201).json(response);
+                }
             }
         });
     });
