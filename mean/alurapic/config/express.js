@@ -13,10 +13,15 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+// Secret
+app.set('secret', 'ultramandalusz');
+
 consign({
     cwd: 'app'
   })
-  .include('api')
+  .include('models')
+  .then('api')
+  .then('routes/auth')
   .then('routes')
   .into(app);
 

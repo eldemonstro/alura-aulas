@@ -1,53 +1,64 @@
-var api = {};
-var count = 2;
+const mongoose = require('mongoose');
 
-var fotos = [{
-    _id: 1,
-    titulo: 'Gato',
-    url: 'http://www.fundosanimais.com/800x600/gato.jpg'
-  },
-  {
-    _id: 2,
-    titulo: 'Otro Gato',
-    url: 'http://www.fundosanimais.com/800x600/wallpapers-gatos.jpg'
-  }
-];
+var api = {};
+
+var model = mongoose.model('Foto');
 
 api.lista = (req, res) => {
   console.log(chalk.blue('Recebendo requisição get em /v1/fotos/'));
-  res.json(fotos);
+
+  model.find({})
+    .then((fotos) => {
+      res.json(fotos);
+    }, (error) => {
+      console.log(chalk.red('Erro ao acessar o banco de dados: ' + error));
+      res.status(500).json(error);
+    })
 }
 
 api.buscaPorId = (req, res) => {
   console.log(chalk.blue('Recebendo requisição get em /v1/fotos/' +
     req.params.id));
 
-  var foto = fotos.find((foto) => {
-    return foto._id == req.params.id;
-  });
+  model.findById(req.params.id)
+    .then((foto) => {
+      if (!foto) {
+        throw Error('Foto não encontrada');
+      }
+      res.json(foto);
+    }, (error) => {
+      console.log(chalk.red('Erro ao acessar o banco de dados: ' + error));
+      res.status(404).json(error);
+    });
 
-  res.json(foto);
 };
 
 api.removePorId = (req, res) => {
   console.log(chalk.blue('Recebendo requisição delete em /v1/fotos/' +
     req.params.id));
 
-  fotos = fotos.filter((foto) => {
-    return foto._id != req.params.id;
-  });
-
-  res.sendStatus(204);
+  model.remove({
+      _id: req.params.id
+    })
+    .then(() => {
+      res.sendStatus(204);
+    }, (error) => {
+      console.log(chalk.red('Erro ao acessar o banco de dados: ' + error));
+      res.status(404).json(error);
+    });
 };
 
 api.adiciona = (req, res) => {
   console.log(chalk.blue('Recebendo requisição post em /v1/fotos/'));
   console.log(chalk.blue('| ' + JSON.stringify(req.body)));
-  var foto = req.body;
-  foto._id = ++count;
-  console.log(chalk.blue('| ' + JSON.stringify(foto)));
-  fotos.push(foto);
-  res.json(foto);
+
+  model.create(req.body)
+    .then((foto) => {
+      res.json(foto);
+    }, (error) => {
+      console.log(chalk.red('Erro ao acessar o banco de dados: ' + error));
+      res.status(500).json(error);
+    });
 };
 
 api.atualizarPorId = (req, res) => {
@@ -55,16 +66,14 @@ api.atualizarPorId = (req, res) => {
     req.params.id));
   console.log(chalk.blue('| ' + JSON.stringify(req.body)));
 
-  var foto = req.body;
-  var fotoId = req.params.id;
+  model.findByIdAndUpdate(req.params.id, req.body)
+    .then((foto) => {
+      res.json(foto);
+    }, (error) => {
+      console.log(chalk.red('Erro ao acessar o banco de dados: ' + error));
+      res.status(500).json(error);
+    });
 
-  var indice = fotos.findIndex((foto) => {
-    return foto._id == fotoId;
-  });
-
-  fotos[indice] = foto;
-
-  res.sendStatus(200);
 };
 
 module.exports = api;
