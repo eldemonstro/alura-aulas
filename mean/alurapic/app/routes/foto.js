@@ -1,9 +1,11 @@
 module.exports = (app) => {
   var api = app.api.foto;
-  app.get('/v1/fotos', api.lista);
+  app.route('/v1/fotos')
+    .get(api.lista)
+    .post(api.adiciona);
 
-  app.get('/v1/fotos/:id', (req, res) => {
-    console.log(chalk.blue('Recebendo requisição em /v1/fotos/' +
-      req.params.id));
-  })
+  app.route('/v1/fotos/:id')
+    .get(api.buscaPorId)
+    .delete(api.removePorId)
+    .put(api.atualizarPorId);
 };

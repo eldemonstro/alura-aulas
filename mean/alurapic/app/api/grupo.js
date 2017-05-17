@@ -14,7 +14,7 @@ api.lista = (req, res) => {
       nome: 'animais'
     }
   ];
-  console.log(chalk.blue('Requisicao em /v1/grupos'));
+  console.log(chalk.blue('Recebendo requisição get em /v1/grupos/'));
   res.json(grupos);
 }
 
