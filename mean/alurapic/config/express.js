@@ -1,7 +1,6 @@
 const express = require('express');
 const consign = require('consign');
 const bodyParser = require('body-parser');
-chalk = require('chalk');
 var app = express();
 
 // Express middlewares
