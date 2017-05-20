@@ -1,5 +1,8 @@
-body {}
+body {
+  padding-top: 100px;
+}
 
 .principal {
+  padding: 50px 15px;
   text-align: center;
 }
