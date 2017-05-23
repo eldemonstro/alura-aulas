@@ -1,21 +1,29 @@
-angular.module('alurapic', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngResource', 'meusServicos'])
-	.config(function($routeProvider, $locationProvider) {
+angular.module('alurapic', ['minhasDiretivas', 'ngAnimate', 'ngRoute', 'ngResource', 'meusServicos'])
+  .config(function($routeProvider, $locationProvider, $httpProvider) {
 
-		$routeProvider.when('/fotos', {
-			templateUrl: 'partials/principal.html',
-			controller: 'FotosController'
-		});
+    $httpProvider.interceptors.push('tokenInterceptor');
 
-		$routeProvider.when('/fotos/new', {
-			templateUrl: 'partials/foto.html',
-			controller: 'FotoController'
-		});
+    $routeProvider.when('/fotos', {
+      templateUrl: 'partials/principal.html',
+      controller: 'FotosController'
+    });
 
-		$routeProvider.when('/fotos/edit/:fotoId', {
-			templateUrl: 'partials/foto.html',
-			controller: 'FotoController'
-		});
+    $routeProvider.when('/fotos/new', {
+      templateUrl: 'partials/foto.html',
+      controller: 'FotoController'
+    });
 
-		$routeProvider.otherwise({redirectTo: '/fotos'});
+    $routeProvider.when('/fotos/edit/:fotoId', {
+      templateUrl: 'partials/foto.html',
+      controller: 'FotoController'
+    });
 
-	});
+    $routeProvider.when('/login', {
+      templateUrl: 'partials/login.html',
+      controller: 'LoginController'
+    });
+
+    $routeProvider.otherwise({
+      redirectTo: '/fotos'
+    });
+  });
