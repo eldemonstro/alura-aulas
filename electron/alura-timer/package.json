@@ -1,0 +1,19 @@
+{
+  "name": "alura-timer",
+  "version": "1.0.0",
+  "description": "Alura timer",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "keywords": [
+    "alura",
+    "timer"
+  ],
+  "author": "Fabricio Bezerra",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.6.10"
+  }
+}
