@@ -7,7 +7,7 @@ const {
 app.on('ready', () => {
   console.log('Aplicacao Iniciada');
   let mainWindow = new BrowserWindow({
-    width: 600,
+    width: 620,
     height: 400
   });
 
