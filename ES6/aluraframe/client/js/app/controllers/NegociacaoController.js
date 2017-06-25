@@ -12,7 +12,7 @@ class NegociacaoController {
   adiciona(event) {
     event.preventDefault();
     this._listaNegociacoes.adiciona(this._criaNegociacao());
-    console.log(this._listaNegociacoes.negociacaoes);
+    this._limpaFormulario();
   }
 
   _criaNegociacao() {
